@@ -105,12 +105,14 @@ select_from_db(cur)
 """
 
 def extract():
-	return get_live_county_data()
+	df = get_live_county_data()
+	df.to_csv('daily.csv')
 
 def transform(df: pd.DataFrame, state: str, cur: psycopg2.extensions.cursor):
 	write_to_db(get_county_with_max_deaths_by_state(df, state), cur)	
 
 def load(state_names: list):
+	df = pd.read_csv('daily.csv')
 	cur = connect()
 	for state in state_names:
 		transform(df, state, cur)
