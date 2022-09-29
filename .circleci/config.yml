@@ -33,12 +33,6 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip3 install pipenv
-      - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pipenv install
       - save_cache:
           paths:
             - ./venv
